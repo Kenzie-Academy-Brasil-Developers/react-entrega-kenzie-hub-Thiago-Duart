@@ -1,0 +1,20 @@
+.presents
+    border-top: 1px solid var(--grey-2)
+    border-bottom: 1px solid var(--grey-2)
+    div
+        height: 7.375rem
+        display: flex
+        align-items: center
+        justify-content: space-between
+.message
+    margin: 2rem 0
+    div
+        display: flex
+        flex-direction: column
+        gap: 2rem
+@media (max-width: 425px)
+    .presents
+        div
+            flex-direction: column
+    .message
+        display: none
