@@ -1,7 +1,6 @@
 import { MyInput } from "../../components/forms/Input";
 import { MyButton } from "../../components/Buttons";
 import { MySelect } from "../../components/forms/Select";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { apiHub } from "../../services/sevices";
 import { ErrorMessage } from "@hookform/error-message";
@@ -10,20 +9,10 @@ import style from "./style.module.sass";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { validate } from "./validateUser";
 import { toast, ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.min.css";
 
 export const CadastrePage = () => {
-  const navigate = useNavigate();
-  const loggedIn = () => {
-    const user = JSON.parse(localStorage.getItem("@token"));
-    if (user) {
-      navigate("/home");
-    }
-  };
-  loggedIn();
-  const userLogin = () => {
-    navigate("/login");
-  };
   const {
     register,
     formState: { errors },
@@ -52,9 +41,9 @@ export const CadastrePage = () => {
       <div className={style.container}>
         <div className={style.form__header}>
           <img src={Logo} alt="Kenzie Hub" />
-          <MyButton styleName={"btn redirect out"} onClick={userLogin}>
-            voltar
-          </MyButton>
+          <Link className="btn redirect out" to={"/login"}>
+            Voltar
+          </Link>
         </div>
         <div className={style.form__container}>
           <h2 className="font title1">Crie sua conta</h2>

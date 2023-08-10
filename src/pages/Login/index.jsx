@@ -10,17 +10,9 @@ import { ErrorMessage } from "@hookform/error-message";
 import "react-toastify/dist/ReactToastify.min.css";
 export const LoginPage = () => {
   const navigate = useNavigate();
-  const loggedIn = () => {
-    const user = JSON.parse(localStorage.getItem("@token"));
-    if (user) {
-      navigate("/home");
-    }
-  };
-  loggedIn();
   const userCadastre = () => {
     navigate("/cadastro");
   };
-
   const {
     register,
     handleSubmit,
@@ -39,6 +31,7 @@ export const LoginPage = () => {
       toast.success("Login efetuado com sucesso", {
         className: "toastStyle",
       });
+      navigate("/");
     } catch (error) {
       toast.error("E-mail ou Senha incorretos", {
         className: "toastStyle",

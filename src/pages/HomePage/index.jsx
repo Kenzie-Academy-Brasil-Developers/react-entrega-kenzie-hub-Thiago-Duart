@@ -1,14 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import style from "./style.module.sass";
 export const HomePage = () => {
-  const navigate = useNavigate();
-  const data = JSON.parse(localStorage.getItem("@token"));
-  const loggendIn = () => {
-    if (!data) {
-      navigate("/login");
-    }
-  };
-  loggendIn();
+  const data = JSON.parse(localStorage.getItem("@token")) || []
   return (
     <>
       <div className={`${style.container}`}>

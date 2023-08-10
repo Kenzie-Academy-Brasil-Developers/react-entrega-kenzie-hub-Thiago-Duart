@@ -3,13 +3,23 @@ import { HomePage } from "../pages/HomePage";
 import { LoginPage } from "../pages/Login";
 import { CadastrePage } from "../pages/Cadastre";
 import { MyTemplate } from "../components/TemplateDefault";
-import { ErrPage } from "../pages/ErrPage";
-
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 export const RoutesMain = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("@token"));
+    if (data) {
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  }, []);
+
   return (
     <Routes>
       <Route
-        path="/home"
+        path="/"
         element={
           <MyTemplate>
             <HomePage />
@@ -17,8 +27,7 @@ export const RoutesMain = () => {
         }
       />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/cadastro" element={<CadastrePage setUser={setUser} />} />
-      <Route path="*" element={<ErrPage />} />
+      <Route path="/cadastro" element={<CadastrePage />} />
     </Routes>
   );
 };
