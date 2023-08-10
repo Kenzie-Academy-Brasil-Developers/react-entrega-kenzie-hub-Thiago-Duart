@@ -1,6 +1,6 @@
 import style from "./style.module.sass";
 export const HomePage = () => {
-  const data = JSON.parse(localStorage.getItem("@token")) || []
+  const data = JSON.parse(localStorage.getItem("@token")) || [];
   return (
     <>
       <div className={`${style.container}`}>

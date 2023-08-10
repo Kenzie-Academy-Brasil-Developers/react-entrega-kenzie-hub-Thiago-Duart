@@ -2,7 +2,7 @@ import { MyInput } from "../../components/forms/Input";
 import { MyButton } from "../../components/Buttons";
 import Logo from "../../assets/Logo.svg";
 import style from "./style.module.sass";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { apiHub } from "../../services/sevices";
 import { toast, ToastContainer } from "react-toastify";
@@ -10,14 +10,12 @@ import { ErrorMessage } from "@hookform/error-message";
 import "react-toastify/dist/ReactToastify.min.css";
 export const LoginPage = () => {
   const navigate = useNavigate();
-  const userCadastre = () => {
-    navigate("/cadastro");
-  };
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const submit = async (formData) => {
     const userLogin = formData;
     try {
@@ -38,6 +36,7 @@ export const LoginPage = () => {
       });
     }
   };
+
   return (
     <>
       <div className={style.container}>
@@ -87,9 +86,9 @@ export const LoginPage = () => {
             <ToastContainer />
           </form>
           <span className="font headlineBold">Ainda não possui uma conta?</span>
-          <MyButton styleName={"btn redirect"} onClick={userCadastre}>
+          <Link to={"/cadastro"} className="btn redirect">
             Cadastre-se
-          </MyButton>
+          </Link>
         </div>
       </div>
     </>

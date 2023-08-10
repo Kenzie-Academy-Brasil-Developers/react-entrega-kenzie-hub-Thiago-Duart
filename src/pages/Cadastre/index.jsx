@@ -133,7 +133,7 @@ export const CadastrePage = () => {
             </div>
             <div className="container__input">
               <MyInput
-                type={"number"}
+                type={"text"}
                 id={"contact"}
                 label={"Contato"}
                 placeholder={"Opçao de contato"}
