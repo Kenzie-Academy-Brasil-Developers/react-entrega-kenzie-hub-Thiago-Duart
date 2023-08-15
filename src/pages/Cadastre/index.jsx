@@ -2,7 +2,6 @@ import { MyInput } from "../../components/forms/Input";
 import { MyButton } from "../../components/Buttons";
 import { MySelect } from "../../components/forms/Select";
 import { useForm } from "react-hook-form";
-import { apiHub } from "../../services/sevices";
 import { ErrorMessage } from "@hookform/error-message";
 import Logo from "../../assets/Logo.svg";
 import style from "./style.module.sass";
@@ -11,6 +10,8 @@ import { validate } from "./validateUser";
 import { toast, ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.min.css";
+import { useContext, useRef } from "react";
+import { CadastreContext } from "../../providers/cadastreContext";
 
 export const CadastrePage = () => {
   const {
@@ -21,20 +22,8 @@ export const CadastrePage = () => {
   } = useForm({
     resolver: zodResolver(validate),
   });
-  const userCadastre = async (content) => {
-    const dataUser = content;
-    try {
-      const { data } = await apiHub.post("/users", dataUser);
-      toast.success("Conta criada com sucesso", {
-        className: "toastStyle",
-      });
-      reset();
-    } catch (error) {
-      toast.error("E-mail ja existente", {
-        className: "toastStyle",
-      });
-    }
-  };
+ 
+  const { userCadastre } = useContext(CadastreContext);
 
   return (
     <>
@@ -48,7 +37,7 @@ export const CadastrePage = () => {
         <div className={style.form__container}>
           <h2 className="font title1">Crie sua conta</h2>
           <p className="font headlineBold">Rapido e grátis, vamos nessa</p>
-          <form onSubmit={handleSubmit(userCadastre)}>
+          <form onSubmit={handleSubmit(userCadastre)} >
             <div className="container__input">
               <MyInput
                 type={"text"}

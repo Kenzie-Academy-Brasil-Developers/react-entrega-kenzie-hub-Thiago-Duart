@@ -8,6 +8,8 @@ import { apiHub } from "../../services/sevices";
 import { toast, ToastContainer } from "react-toastify";
 import { ErrorMessage } from "@hookform/error-message";
 import "react-toastify/dist/ReactToastify.min.css";
+import { LoginContext } from "../../providers/LoginContext";
+import { useContext } from "react";
 export const LoginPage = () => {
   const navigate = useNavigate();
   const {
@@ -16,26 +18,7 @@ export const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  const submit = async (formData) => {
-    const userLogin = formData;
-    try {
-      const { data } = await apiHub.post("/sessions", userLogin);
-      const user = {
-        token: data.token,
-        module: data.user.course_module,
-        name: data.user.name,
-      };
-      localStorage.setItem("@token", JSON.stringify(user));
-      toast.success("Login efetuado com sucesso", {
-        className: "toastStyle",
-      });
-      navigate("/");
-    } catch (error) {
-      toast.error("E-mail ou Senha incorretos", {
-        className: "toastStyle",
-      });
-    }
-  };
+  const { submit } = useContext(LoginContext);
 
   return (
     <>
