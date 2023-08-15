@@ -7,11 +7,12 @@ import Logo from "../../assets/Logo.svg";
 import style from "./style.module.sass";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { validate } from "./validateUser";
-import { toast, ToastContainer } from "react-toastify";
+import {ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.min.css";
-import { useContext, useRef } from "react";
-import { CadastreContext } from "../../providers/cadastreContext";
+import { useContext} from "react";
+import { UserContext } from "../../providers/userContext"; 
+
 
 export const CadastrePage = () => {
   const {
@@ -23,7 +24,12 @@ export const CadastrePage = () => {
     resolver: zodResolver(validate),
   });
  
-  const { userCadastre } = useContext(CadastreContext);
+  const { userCadastre } = useContext( UserContext);
+
+  const submit = async(content)=>{
+      const response = await userCadastre(content)
+      response && reset() 
+  }
 
   return (
     <>
@@ -37,7 +43,7 @@ export const CadastrePage = () => {
         <div className={style.form__container}>
           <h2 className="font title1">Crie sua conta</h2>
           <p className="font headlineBold">Rapido e grátis, vamos nessa</p>
-          <form onSubmit={handleSubmit(userCadastre)} >
+          <form onSubmit={handleSubmit(submit)} >
             <div className="container__input">
               <MyInput
                 type={"text"}

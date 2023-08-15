@@ -1,14 +1,35 @@
 import { createContext } from "react";
+import { toast } from "react-toastify";
 import { apiHub } from "../services/sevices";
 
 export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
-  const { token } = JSON.parse(localStorage.getItem("@token")) || [];
+
+  const userCadastre = async (content) => {
+    const dataUser = content;
+
+    try {
+      await apiHub.post("/users", dataUser);
+      toast.success("Conta criada com sucesso!!!", {
+        className: "toastStyle",
+      });
+      return true;
+
+    } catch (error) {
+      toast.error("E-mail ja existente", {
+        className: "toastStyle",
+      });
+      return false;
+    }
+  };
+
   const logOut = () => {
     localStorage.removeItem("@token");
   };
+  
   const userProfile = async () => {
+    const { token } = JSON.parse(localStorage.getItem("@token")) || [];
     try {
       const { data } = await apiHub.get(`/profile`, {
         headers: {
@@ -22,7 +43,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ logOut, userProfile }}>
+    <UserContext.Provider value={{ logOut, userProfile, userCadastre }}>
       {children}
     </UserContext.Provider>
   );

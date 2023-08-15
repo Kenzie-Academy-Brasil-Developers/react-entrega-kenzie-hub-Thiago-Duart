@@ -10,17 +10,18 @@ export const LoginProvider = ({ children }) => {
 
   const submit = async (formData) => {
     const userLogin = formData;
+
     try {
       const { data } = await apiHub.post("/sessions", userLogin);
       const user = {
         token: data.token,
-        module: data.user.course_module,
-        name: data.user.name,
       };
+
       localStorage.setItem("@token", JSON.stringify(user));
       toast.success("Login efetuado com sucesso", {
         className: "toastStyle",
       });
+
       navigate("/");
     } catch (error) {
       toast.error("E-mail ou Senha incorretos", {
