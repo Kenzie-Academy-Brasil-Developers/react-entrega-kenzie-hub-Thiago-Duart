@@ -7,14 +7,15 @@ import Logo from "../../assets/Logo.svg";
 import style from "./style.module.sass";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { validate } from "./validateUser";
-import {ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.min.css";
-import { useContext} from "react";
-import { UserContext } from "../../providers/userContext"; 
-
+import { useMutation } from "@tanstack/react-query";
+import { apiHub } from "../../services/sevices";
+import { useState } from "react";
 
 export const CadastrePage = () => {
+  const [showToast, setShowToast] = useState(false);
   const {
     register,
     formState: { errors },
@@ -23,13 +24,24 @@ export const CadastrePage = () => {
   } = useForm({
     resolver: zodResolver(validate),
   });
- 
-  const { userCadastre } = useContext( UserContext);
 
-  const submit = async(content)=>{
-      const response = await userCadastre(content)
-      response && reset() 
-  }
+  const submitCadastre = useMutation({
+    mutationFn: (dataUser) => {
+      return apiHub.post("/users", dataUser);
+    },
+    onSuccess: () => {
+      toast.success("Conta criada com sucesso!!!", {
+        className: "toastStyle",
+      });
+      reset();
+    },
+    onError: () => {
+      setShowToast(true);
+      toast.error("E-mail ja existente", {
+        className: "toastStyle",
+      });
+    },
+  });
 
   return (
     <>
@@ -43,7 +55,7 @@ export const CadastrePage = () => {
         <div className={style.form__container}>
           <h2 className="font title1">Crie sua conta</h2>
           <p className="font headlineBold">Rapido e grátis, vamos nessa</p>
-          <form onSubmit={handleSubmit(submit)} >
+          <form onSubmit={handleSubmit(submitCadastre.mutate)}>
             <div className="container__input">
               <MyInput
                 type={"text"}

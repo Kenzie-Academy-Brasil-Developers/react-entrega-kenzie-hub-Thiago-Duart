@@ -5,7 +5,6 @@ import { apiHub } from "../services/sevices";
 export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
-
   const userCadastre = async (content) => {
     const dataUser = content;
 
@@ -28,6 +27,8 @@ export const UserProvider = ({ children }) => {
     localStorage.removeItem("@token");
   };
   
+
+
   const userProfile = async () => {
     const { token } = JSON.parse(localStorage.getItem("@token")) || [];
     try {
