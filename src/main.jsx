@@ -5,13 +5,13 @@ import { BrowserRouter } from "react-router-dom";
 import { LoginProvider } from "./providers/LoginContext.jsx";
 import { UserProvider } from "./providers/userContext.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
-      <React.StrictMode>
-        <BrowserRouter>
-  <UserProvider>
-    <LoginProvider>
+  <React.StrictMode>
+    <BrowserRouter>
+      <UserProvider>
+        <LoginProvider>
           <App />
-    </LoginProvider>
-  </UserProvider>
-        </BrowserRouter>
-      </React.StrictMode>
+        </LoginProvider>
+      </UserProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );
