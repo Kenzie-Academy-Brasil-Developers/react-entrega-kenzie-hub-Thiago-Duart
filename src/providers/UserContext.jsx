@@ -1,31 +1,36 @@
 import { createContext } from "react";
-import { toast } from "react-toastify";
 import { apiHub } from "../services/sevices";
+import { useQuery } from "@tanstack/react-query";
 
 export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
-  
   const logOut = () => {
     localStorage.removeItem("@token");
   };
-  
-  const userProfile = async () => {
-    const  token  = JSON.parse(localStorage.getItem("@token")) || [];
-    try {
-      const { data } = await apiHub.get(`/profile`, {
+  const key = ["profile"];
+  const { isLoading, isError, data } = useQuery({
+    queryKey: key,
+    queryFn: async () => {
+      const token = JSON.parse(localStorage.getItem("@token"));
+      const response = await apiHub.get("/profile", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+      return response;
+    },
+  });
 
+  if (isLoading) {
+    return <p className="font title1">Carregando...</p>;
+  }
+  if (isError) {
+    return <p className="font title1">Algo deu Errado</p>;
+  }
+  const dataProfile = data?.data;
   return (
-    <UserContext.Provider value={{ logOut, userProfile}}>
+    <UserContext.Provider value={{ logOut, dataProfile }}>
       {children}
     </UserContext.Provider>
   );
