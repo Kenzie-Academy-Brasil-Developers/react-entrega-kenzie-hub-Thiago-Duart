@@ -1,38 +1,32 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import style from "./style.module.sass";
 import { UserContext } from "../../providers/userContext";
-import { useState, useEffect } from "react";
+import { CreateTech } from "../../components/Modals/CreateTech";
+import { EditTech } from "../../components/Modals/EditTech";
+import { TechList } from "../../components/TechList";
+import { TechContext } from "../../providers/techContext";
+import { ToastContainer } from "react-toastify";
 export const HomePage = () => {
-  const { userProfile } = useContext(UserContext);
-  const [profile, setProfile] = useState({});
-  useEffect(() => {
-    const awaitResponse = async () => {
-      setProfile(await userProfile());
-    };
-    awaitResponse();
-  },[]);
-  
+  const { dataProfile } = useContext(UserContext);
+  const { modalCreateTech, modalEditTech } = useContext(TechContext);
   return (
     <>
       <div className={`${style.container}`}>
         <section className={style.presents}>
           <div className="container">
-            <h2 className="font title1">Ola, {profile.name}</h2>
-            <p className="font headlineBold">{profile.course_module}</p>
+            <h2 className="font title1">Ola, {dataProfile?.name}</h2>
+            <p className="font headlineBold">{dataProfile?.course_module}</p>
           </div>
         </section>
-        <section className={style.message}>
+        <section className={style.main}>
           <div className={`${"container"}`}>
-            <h2 className="font title1">
-              Que pena! Estamos em desenvolvimento :(
-            </h2>
-            <p className="font paragraph">
-              Nossa aplicação está em desenvolvimento, em breve teremos
-              novidades
-            </p>
+            <TechList />
+            {modalCreateTech && <CreateTech />}
+            {modalEditTech&& <EditTech />}
           </div>
         </section>
       </div>
+      <ToastContainer/>
     </>
   );
 };
