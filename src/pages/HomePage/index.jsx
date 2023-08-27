@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import style from "./style.module.sass";
 import { UserContext } from "../../providers/userContext";
 import { CreateTech } from "../../components/Modals/CreateTech";
 import { EditTech } from "../../components/Modals/EditTech";
 import { TechList } from "../../components/TechList";
 import { TechContext } from "../../providers/techContext";
+import { ToastContainer } from "react-toastify";
 export const HomePage = () => {
   const { dataProfile } = useContext(UserContext);
   const { modalCreateTech, modalEditTech } = useContext(TechContext);
@@ -21,10 +22,11 @@ export const HomePage = () => {
           <div className={`${"container"}`}>
             <TechList />
             {modalCreateTech && <CreateTech />}
-            {modalEditTech && <EditTech />}
+            {modalEditTech&& <EditTech />}
           </div>
         </section>
       </div>
+      <ToastContainer/>
     </>
   );
 };

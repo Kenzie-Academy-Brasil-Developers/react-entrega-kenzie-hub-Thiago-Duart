@@ -14,7 +14,7 @@ export const TechList = ()=>{
                 </div>
             </div>
             <div className={style.main}>
-            <ul >
+            <ul className={style.list}>
                 <TechCard/>
             </ul>
             </div>
