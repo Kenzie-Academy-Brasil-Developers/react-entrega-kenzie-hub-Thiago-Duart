@@ -1,16 +1,25 @@
 .container
-    margin: 0 auto
+    position: absolute
+    top: 2rem
+    left: 40%
     padding: 0 1rem
-    width: 25rem
+    width: 28rem
 .header
     display: flex
     flex-direction: row !important
     justify-content: space-between
     align-items: center
-    padding: 1rem 1rem
+    padding: 1.4rem 1.4rem
     background: var(--grey-2)
 .form
     background: var(--grey-3)
     padding: 1rem
     input
-        width: 90%
+        width: 91%
+@media (max-width: 425px)
+    .container
+        position: absolute
+        top: 2rem
+        left: 8px
+        padding: 0 1rem
+        width: 26rem
