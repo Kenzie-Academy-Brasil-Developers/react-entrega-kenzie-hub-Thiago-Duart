@@ -4,11 +4,11 @@ import { ProfileContext } from "../../providers/ProfileContext";
 import { CreateTech } from "../../components/Modals/CreateTech";
 import { EditTech } from "../../components/Modals/EditTech";
 import { TechList } from "../../components/TechList";
-import { TechContext } from "../../providers/techContext";
+import { ProfileTechContext} from "../../providers/ProfileTechContext";
 import { ToastContainer } from "react-toastify";
 export const HomePage = () => {
   const { dataProfile } = useContext(ProfileContext);
-  const { modalCreateTech, modalEditTech } = useContext(TechContext);
+  const { modalCreateTech, modalEditTech } = useContext(ProfileTechContext);
   
   return (
     <>

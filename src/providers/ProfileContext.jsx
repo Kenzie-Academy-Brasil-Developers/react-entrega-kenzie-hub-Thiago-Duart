@@ -33,14 +33,14 @@ export const UserProvider = ({ children }) => {
             Authorization: `Bearer ${token}`,
           },
         }));
-        return response;
-      },
-    });
-    
-    if (isLoading) {
-      return <p className="font title1">Carregando...</p>;
-    }
-    if (isError) {
+      return response;
+    },
+  });
+
+  if (isLoading) {
+    return <p className="font title1">Carregando...</p>;
+  }
+  if (isError) {
     return <p className="font title1">Algo deu Errado</p>;
   }
 

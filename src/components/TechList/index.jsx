@@ -2,9 +2,9 @@ import {BsPlusLg} from "react-icons/bs"
 import { TechCard } from "./TechCard"
 import style from "./style.module.sass"
 import { useContext } from "react"
-import { TechContext } from "../../providers/techContext"
+import { ProfileTechContext} from "../../providers/ProfileTechContext"
 export const TechList = ()=>{
-  const {setModalCreateTech} = useContext(TechContext)
+  const {setModalCreateTech} = useContext(ProfileTechContext)
     return(
         <div className={style.container}>
             <div className={style.header}>

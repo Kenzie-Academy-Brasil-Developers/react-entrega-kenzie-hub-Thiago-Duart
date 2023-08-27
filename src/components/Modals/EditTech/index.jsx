@@ -2,10 +2,10 @@ import { FiX } from "react-icons/fi";
 import { MyInput } from "../../forms/Input";
 import style from "./style.module.sass";
 import { useContext } from "react";
-import { TechContext } from "../../../providers/techContext";
+import { ProfileTechContext} from "../../../providers/ProfileTechContext";
 import { useForm } from "react-hook-form";
 export const EditTech = () => {
-  const { setModalEditTech, dataTech, editTech } = useContext(TechContext);
+  const { setModalEditTech, dataTech, editTech } = useContext(ProfileTechContext);
   const { register, handleSubmit } = useForm();
   return (
     <div className={style.container}>

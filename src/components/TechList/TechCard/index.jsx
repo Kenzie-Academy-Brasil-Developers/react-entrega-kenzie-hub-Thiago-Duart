@@ -1,13 +1,13 @@
 import { BsFillTrashFill } from "react-icons/bs";
 import { FiEdit2 } from "react-icons/fi";
 import style from "./style.module.sass";
-import { TechContext } from "../../../providers/techContext";
+import {ProfileTechContext} from "../../../providers/ProfileTechContext";
 import { useContext } from "react";
 import { ProfileContext } from "../../../providers/ProfileContext";
 
 export const TechCard = () => {
   const { setModalEditTech, modalEditTech, setDataTech, deleteTech } =
-    useContext(TechContext);
+    useContext(ProfileTechContext);
     const { dataProfile } =
     useContext(ProfileContext);
   return (
