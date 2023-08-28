@@ -3,7 +3,7 @@ import { apiHub } from "../services/sevices";
 import { toast } from "react-toastify";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export const TechContext = createContext({});
+export const ProfileTechContext = createContext({});
 
 export const TechProvider = ({ children }) => {
   const [modalCreateTech, setModalCreateTech] = useState(false);
@@ -52,7 +52,7 @@ export const TechProvider = ({ children }) => {
     }
   });
   return (
-    <TechContext.Provider
+    <ProfileTechContext.Provider
       value={{
         modalCreateTech,
         setModalCreateTech,
@@ -65,6 +65,6 @@ export const TechProvider = ({ children }) => {
       }}
     >
       {children}
-    </TechContext.Provider>
+    </ProfileTechContext.Provider>
   );
 };

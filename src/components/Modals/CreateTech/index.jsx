@@ -2,13 +2,13 @@ import { FiX } from "react-icons/fi";
 import { MyInput } from "../../forms/Input";
 import style from "./style.module.sass";
 import { useContext } from "react";
-import { TechContext } from "../../../providers/techContext";
+import { ProfileTechContext} from "../../../providers/ProfileTechContext";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiHub } from "../../../services/sevices";
 import { toast } from "react-toastify";
 export const CreateTech = () => {
-  const { setModalCreateTech } = useContext(TechContext);
+  const { setModalCreateTech } = useContext(ProfileTechContext);
   const key = ['profile']
   const queryclient = useQueryClient()
   const {

@@ -1,23 +1,19 @@
 import { BsFillTrashFill } from "react-icons/bs";
 import { FiEdit2 } from "react-icons/fi";
 import style from "./style.module.sass";
-import { TechContext } from "../../../providers/techContext";
+import {ProfileTechContext} from "../../../providers/ProfileTechContext";
 import { useContext } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { ProfileContext } from "../../../providers/ProfileContext";
 
 export const TechCard = () => {
   const { setModalEditTech, modalEditTech, setDataTech, deleteTech } =
-    useContext(TechContext);
-
-  const key = ["profile"];
-  const queryclient = useQueryClient();
-  const { data } = queryclient.getQueryData(key);
-  const techs = data.techs;
-
+    useContext(ProfileTechContext);
+    const { dataProfile } =
+    useContext(ProfileContext);
   return (
     <>
       <div>
-        {techs.map((tech) => (
+        {dataProfile?.data.techs.map((tech) => (
           <li className={style.card} key={tech.id}>
             <h2 className="font title2">{tech.title}</h2>
             <div className={style.handle}>
