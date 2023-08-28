@@ -36,10 +36,10 @@ export const CadastrePage = () => {
       reset();
     },
     onError: () => {
-      setShowToast(true);
       toast.error("E-mail ja existente", {
         className: "toastStyle",
       });
+      setShowToast(true);
     },
   });
 

@@ -3,7 +3,9 @@
     top: 2rem
     left: 40%
     padding: 0 1rem
-    width: 28rem
+    width: 40%
+    min-width: 320px
+    max-width: 427px
 .header
     display: flex
     flex-direction: row !important
@@ -16,13 +18,13 @@
     padding: 1rem
     input
         width: 91%
+@media (max-width: 600px)
+    .container
+        left: 5% !important
+@media (max-width: 390px)
+    .container
+        left: 5%!important
 @media (max-width: 1080px)
      .container
-       left: 20%
-@media (max-width: 580px)
-    .container
-        position: absolute
-        top: 2rem
-        left: 8px
-        padding: 0 1rem
-        width: 26rem
+       left: 30%
+   

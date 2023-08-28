@@ -25,7 +25,6 @@ export const LoginPage = () => {
     onSuccess: (data) => {
       localStorage.setItem("@token", JSON.stringify(data.token));
       navigate("/");
-      location.reload()
     },
     onError: () => {
       toast.error("E-mail ou Senha incorretos", {
